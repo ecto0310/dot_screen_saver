@@ -8,7 +8,8 @@ endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 set(SOURCE
-  ${PROJECT_SOURCE_DIR}/src/main.cpp)
+  ${PROJECT_SOURCE_DIR}/src/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/tokenizer.cpp)
 
 add_executable(dot_screen_saver
   ${SOURCE}) 
