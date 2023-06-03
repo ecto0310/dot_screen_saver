@@ -11,7 +11,8 @@ set(SOURCE
   ${PROJECT_SOURCE_DIR}/src/main.cpp
   ${PROJECT_SOURCE_DIR}/src/tokenizer.cpp
   ${PROJECT_SOURCE_DIR}/src/parser.cpp
-  ${PROJECT_SOURCE_DIR}/src/node.cpp)
+  ${PROJECT_SOURCE_DIR}/src/node.cpp
+  ${PROJECT_SOURCE_DIR}/src/runner.cpp)
 
 add_executable(dot_screen_saver
   ${SOURCE}) 
