@@ -1,0 +1,34 @@
+<program>       := <func>*
+<func>          := <ident> "{" <stmt> "}"
+<stmt>          := "for" "("<expr> ";" <expr> ";" <expr> ")" <stmt>
+                | "while" "(" <expr> ")" <stmt>
+                | "if" "(" <expr> ")" <stmt>
+                | <expr> ";"
+<expr>          := <assign>
+<assign>        := <log_or> ("=" <log_or>)*
+<log_or>        := <log_and> ("||" <log_and>)*
+<log_and>       := <or> ("&&" <or>)*
+<or>            := <xor> ("|" <xor>)*
+<xor>           := <and> ("^" <and>)*
+<and>           := <equal> ("&" <equal>)*
+<equal>         := <relation> ("==" <relation>)*
+<relation>      := <add> (("<" | "<=" | ">" | ">=") <add>)*
+<add>           := <mul> (("+" | "-") <add>)*
+<mul>           := <prim> (("*" | "/" | "%") <mul>)*
+<unary>         := ["-" | "++" | "--"] <prim>
+<prim>          := "[[" <expr> "," <expr> "]]"
+                | "[" <expr> "," <expr> "]"
+                | "(" <expr> ")"
+                | <num>
+                | <ident>
+<num>           := <number>+
+<number>        := "0"| "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+<ident>         :=  <begin_ident> <next_ident>*
+<begin_ident>   := "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i"| "j" | "k" 
+                | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" 
+                | "w" | "x" | "y" | "z" | "A" | "B" | "C" | "D" | "E" | "F" 
+                | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P"
+                | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+<next_ident>    := <begin_ident>
+                | "_"
+                | <number>

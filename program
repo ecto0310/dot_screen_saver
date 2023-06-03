@@ -1,0 +1,40 @@
+init {
+  for (x = 0; x < wx; ++x) {
+    for (y = 0; y < wy; ++y) {
+      if (1 == rand % 5) {
+        [[x, y]] = 65535;
+      }
+    }
+  }
+}
+
+draw {
+  spwan = 0;
+  for (x = 0; x < wx; ++x) {
+    for (y = 0; y < wy; ++y) {
+      count = 0;
+      for (dx = -1; dx <= 1; ++dx) {
+        for (dy = -1; dy <= 1; ++dy) {
+          if (dx != 0 || dy != 0) {
+            if ([x - dx, y - dy] == 65535 || [x - dx, y - dy] == 65280) {
+              count = count + 1;
+            }
+          }
+        }
+      }
+      if ([x, y] == 65535 || [x, y] == 65280) {
+        [[x, y]] = 3342336;
+      }
+      if ((count == 2 && ([x, y] == 65535 || [x, y] == 65280)) || count == 3) {
+        [[x, y]] = 65535;
+      }
+      if (count == 3 && ([x, y] == 0 || [x, y] == 3342336)) {
+        [[x, y]] = 65280;
+        spwan = spwan + 1;
+      }
+    }
+  }
+  if (spwan <= 20) {
+    init;
+  }
+}
