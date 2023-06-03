@@ -3,7 +3,11 @@
 Node* Node::new_bin(String calc, Node* lhs, Node* rhs) {
   Node* node = (Node*)calloc(1, sizeof(Node));
   node->kind = NodeKind::ND_Bin;
+#ifdef _WIN32
+  node->calc = String(calc);
+#else
   node->calc = calc;
+#endif
   node->lhs = lhs;
   node->rhs = rhs;
   return node;
@@ -27,7 +31,11 @@ Node* Node::new_num(int32 num) {
 Node* Node::new_var(String var) {
   Node* node = (Node*)calloc(1, sizeof(Node));
   node->kind = NodeKind::ND_Var;
+#ifdef _WIN32
+  node->var = String(var);
+#else
   node->var = var;
+#endif
   return node;
 }
 
