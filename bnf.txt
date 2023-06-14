@@ -1,8 +1,11 @@
 <program>       := <func>*
-<func>          := <ident> "{" <stmt> "}"
-<stmt>          := "for" "("<expr> ";" <expr> ";" <expr> ")" <stmt>
-                | "while" "(" <expr> ")" <stmt>
-                | "if" "(" <expr> ")" <stmt>
+<func>          := <ident> "{" <stmts> "}"
+<stmts>         := "{" <stmt>* "}"
+                | <stmt>
+<stmt>          := "for" "("<expr> ";" <expr> ";" <expr> ")" <stmts>
+                | "while" "(" <expr> ")" <stmts>
+                | "if" "(" <expr> ")" <stmts>
+                | "if" "(" <expr> ")" <stmts> "else" <stmts>
                 | <expr> ";"
 <expr>          := <assign>
 <assign>        := <log_or> ("=" <log_or>)*
@@ -14,8 +17,9 @@
 <equal>         := <relation> ("==" <relation>)*
 <relation>      := <add> (("<" | "<=" | ">" | ">=") <add>)*
 <add>           := <mul> (("+" | "-") <add>)*
-<mul>           := <prim> (("*" | "/" | "%") <mul>)*
-<unary>         := ["-" | "++" | "--"] <prim>
+<mul>           := <unary> (("*" | "/" | "%") <mul>)*
+<unary>         := <prim>
+                | ("-" | "++" | "--") <prim>
 <prim>          := "[[" <expr> "," <expr> "]]"
                 | "[" <expr> "," <expr> "]"
                 | "(" <expr> ")"
